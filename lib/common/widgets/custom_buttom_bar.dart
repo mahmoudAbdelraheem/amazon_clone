@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:amazon_clone/features/home/screens/home_screen.dart';
 import 'package:badges/badges.dart' as badges;
@@ -17,7 +18,7 @@ class _CustomButtomBarState extends State<CustomButtomBar> {
   final double buttomBarBorderWidth = 5;
   final List<Widget> pages = [
     const HomeScreen(),
-    const Center(child: Text('Profile Page')),
+    const ProfileScreen(),
     const Center(child: Text('Cart Page')),
   ];
   void updatePage(int index) {
