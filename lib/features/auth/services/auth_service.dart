@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:amazon_clone/api_links.dart';
+import 'package:amazon_clone/common/widgets/custom_buttom_bar.dart';
 import 'package:amazon_clone/constants/error_handle.dart';
 import 'package:amazon_clone/constants/utils.dart';
-import 'package:amazon_clone/features/home/screens/home_screen.dart';
 import 'package:amazon_clone/models/user_model.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +100,7 @@ class AuthServiceImp extends AuthService {
               if (context.mounted) {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  HomeScreen.routeName,
+                  CustomButtomBar.routeName,
                   (route) => false,
                 );
               }
