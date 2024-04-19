@@ -15,10 +15,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const HomeScreen(),
       );
-    case CustomButtomBar.routeName:
+    case CustomUserButtomBar.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => const CustomButtomBar(),
+        builder: (_) => const CustomUserButtomBar(),
       );
 
     default:

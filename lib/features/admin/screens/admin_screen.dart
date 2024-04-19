@@ -1,24 +1,26 @@
-import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/profile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:amazon_clone/features/home/screens/home_screen.dart';
-import 'package:badges/badges.dart' as badges;
 
-class CustomUserButtomBar extends StatefulWidget {
-  static const routeName = 'actual_home';
-  const CustomUserButtomBar({super.key});
+import '../../../constants/global_variables.dart';
+
+class AdminScreen extends StatefulWidget {
+  static const String routeName = 'admain_screen';
+  const AdminScreen({super.key});
 
   @override
-  State<CustomUserButtomBar> createState() => _CustomUserButtomBarState();
+  State<AdminScreen> createState() => _AdminScreenState();
 }
 
-class _CustomUserButtomBarState extends State<CustomUserButtomBar> {
+class _AdminScreenState extends State<AdminScreen> {
   int _pageIndex = 0;
   final double buttomBarWidth = 42;
   final double buttomBarBorderWidth = 5;
   final List<Widget> pages = [
-    const HomeScreen(),
-    const ProfileScreen(),
+    const Center(
+      child: Text('Post Page'),
+    ),
+    const Center(
+      child: Text('Analytics page'),
+    ),
     const Center(child: Text('Cart Page')),
   ];
   void updatePage(int index) {
@@ -30,6 +32,38 @@ class _CustomUserButtomBarState extends State<CustomUserButtomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          elevation: 0,
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: GlobalVariables.appBarGradient,
+            ),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  GlobalVariables.appLogo,
+                  width: 120,
+                  height: 45,
+                  color: Colors.black,
+                ),
+              ),
+              const Text(
+                'Admin',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
       body: pages[_pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _pageIndex,
@@ -39,7 +73,7 @@ class _CustomUserButtomBarState extends State<CustomUserButtomBar> {
         iconSize: 28,
         onTap: updatePage,
         items: [
-          //? home page
+          //? Post Orders
           BottomNavigationBarItem(
             icon: Container(
               width: buttomBarWidth,
@@ -57,7 +91,7 @@ class _CustomUserButtomBarState extends State<CustomUserButtomBar> {
             ),
             label: '',
           ),
-          //? profile page
+          //? analytics
           BottomNavigationBarItem(
             icon: Container(
               width: buttomBarWidth,
@@ -71,11 +105,12 @@ class _CustomUserButtomBarState extends State<CustomUserButtomBar> {
                   ),
                 ),
               ),
-              child: const Icon(Icons.person_outline_outlined),
+              child: const Icon(Icons.analytics_outlined),
             ),
             label: '',
           ),
-          //? cart page
+
+          //? orders
           BottomNavigationBarItem(
             icon: Container(
               width: buttomBarWidth,
@@ -89,12 +124,7 @@ class _CustomUserButtomBarState extends State<CustomUserButtomBar> {
                   ),
                 ),
               ),
-              child: const badges.Badge(
-                badgeContent: Text('2'),
-                badgeStyle:
-                    badges.BadgeStyle(elevation: 0, badgeColor: Colors.white),
-                child: Icon(Icons.shopping_cart_outlined),
-              ),
+              child: const Icon(Icons.all_inbox_outlined),
             ),
             label: '',
           ),

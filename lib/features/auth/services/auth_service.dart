@@ -100,7 +100,7 @@ class AuthServiceImp extends AuthService {
               if (context.mounted) {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  CustomButtomBar.routeName,
+                  CustomUserButtomBar.routeName,
                   (route) => false,
                 );
               }
