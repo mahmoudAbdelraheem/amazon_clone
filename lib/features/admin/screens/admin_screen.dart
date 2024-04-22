@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variables.dart';
+import 'post_screen.dart';
 
 class AdminScreen extends StatefulWidget {
   static const String routeName = 'admain_screen';
@@ -15,9 +16,7 @@ class _AdminScreenState extends State<AdminScreen> {
   final double buttomBarWidth = 42;
   final double buttomBarBorderWidth = 5;
   final List<Widget> pages = [
-    const Center(
-      child: Text('Post Page'),
-    ),
+    const PostScreen(),
     const Center(
       child: Text('Analytics page'),
     ),

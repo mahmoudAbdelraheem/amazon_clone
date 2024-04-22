@@ -7,4 +7,7 @@ class ApiLinks {
   static const signIn = "$server/api/signin";
   static const vaildToken = "$server/api/tokenIsValid";
   static const getUserData = "$server/";
+  //? products links
+  static const addProduct = "$server/admin/addproduct";
+  static const getProducts = "$server/admin/getproducts";
 }

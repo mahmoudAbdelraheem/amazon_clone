@@ -4,17 +4,19 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController myController;
   final String hintText;
   final String? Function(String?)? validator;
+  final int maxLine;
   const CustomTextField({
     super.key,
     required this.myController,
     required this.hintText,
     this.validator,
+    this.maxLine = 1,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
         controller: myController,
         decoration: InputDecoration(
@@ -31,6 +33,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         validator: validator,
+        maxLines: maxLine,
       ),
     );
   }
