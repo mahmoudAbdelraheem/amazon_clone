@@ -27,6 +27,16 @@ class _PostScreenState extends State<PostScreen> {
     setState(() {});
   }
 
+  deleteProduct(String productId, int index) async {
+    await adminServices.deleteProduct(
+        context: context,
+        id: productId,
+        onSuccess: () {
+          products!.removeAt(index);
+          setState(() {});
+        });
+  }
+
   @override
   void initState() {
     getProduct();
@@ -45,33 +55,36 @@ class _PostScreenState extends State<PostScreen> {
               itemCount: products!.length,
               itemBuilder: (context, index) {
                 ProductModel productData = products![index];
-                print("product data of index [$index]= ${productData.name}");
-                print('image length  = ${productData.imagesUrl.length}');
                 return Column(
                   children: [
                     SizedBox(
                       height: 140,
-                      child: productData.imagesUrl.isNotEmpty
-                          ? SingleProduct(image: productData.imagesUrl[0])
+                      child: productData.images.isNotEmpty
+                          ? SingleProduct(image: productData.images[0])
                           : const Placeholder(), // Replace Placeholder with appropriate widget
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            productData.name,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              productData.name,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
                           ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.delete_outline,
+                          IconButton(
+                            onPressed: () {
+                              deleteProduct(productData.id!, index);
+                            },
+                            icon: const Icon(
+                              Icons.delete_outline,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 );

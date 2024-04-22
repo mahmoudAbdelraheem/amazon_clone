@@ -10,4 +10,5 @@ class ApiLinks {
   //? products links
   static const addProduct = "$server/admin/addproduct";
   static const getProducts = "$server/admin/getproducts";
+  static const deleteProduct = "$server/admin/deleteproduct";
 }

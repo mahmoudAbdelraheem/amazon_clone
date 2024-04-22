@@ -25,6 +25,12 @@ abstract class AdminServices {
 
   //? get all products
   Future<List<ProductModel>> getProducts(BuildContext context);
+  //? delete product by id
+  deleteProduct({
+    required BuildContext context,
+    required String id,
+    required VoidCallback onSuccess,
+  });
 }
 
 class AdminServicesImp extends AdminServices {
@@ -54,7 +60,7 @@ class AdminServicesImp extends AdminServices {
         name: name,
         description: description,
         quantity: quantity,
-        imagesUrl: imageUrls,
+        images: imageUrls,
         category: category,
         price: price,
       );
@@ -101,7 +107,6 @@ class AdminServicesImp extends AdminServices {
           "token": token!,
         },
       );
-      print("response body = ${response.body}");
       if (context.mounted) {
         httpErrorHandle(
           response: response,
@@ -120,5 +125,38 @@ class AdminServicesImp extends AdminServices {
       }
     }
     return products;
+  }
+
+  @override
+  deleteProduct({
+    required BuildContext context,
+    required String id,
+    required VoidCallback onSuccess,
+  }) async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      var token = pref.getString('token');
+      var response = await http.post(
+        Uri.parse(ApiLinks.deleteProduct),
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "token": token!,
+        },
+        body: jsonEncode({'id': id}),
+      );
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            onSuccess();
+          },
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        showSnakBar(context, e.toString());
+      }
+    }
   }
 }
