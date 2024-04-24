@@ -12,10 +12,12 @@ const app = express();
 //? import from other files
 const authRouter = require('./routes/auth.js');
 const adminRoute = require('./routes/admin.js');
+const productRoute = require('./routes/product.js');
 //? middlware
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRoute);
+app.use(productRoute);
 
 //? connect to database useing mongooes 
 mongooes

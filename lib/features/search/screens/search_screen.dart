@@ -1,22 +1,40 @@
-import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/features/home/widget/address_box.dart';
-import 'package:amazon_clone/features/home/widget/carousel_images.dart';
-import 'package:amazon_clone/features/search/screens/search_screen.dart';
+import 'package:amazon_clone/features/search/services/search_services.dart';
+import 'package:amazon_clone/features/search/widgets/searched_product.dart';
+import 'package:amazon_clone/models/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:amazon_clone/constants/global_variables.dart';
 
-import '../widget/deal_of_day.dart';
-import '../widget/top_categories.dart';
+import '../../../constants/global_variables.dart';
+import '../../../constants/utils.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String routeName = '/home_screen';
-  const HomeScreen({super.key});
+class SearchScreen extends StatefulWidget {
+  static const String routeName = '/search_screen';
+  final String searchQuary;
+  const SearchScreen({super.key, required this.searchQuary});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SearchScreenState extends State<SearchScreen> {
+  List<ProductModel>? products;
+  SearchServicesImp searchServices = SearchServicesImp();
+
+  void searchProducts() async {
+    products = await searchServices.searchProducts(
+      context: context,
+      searchQuary: widget.searchQuary,
+    );
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    searchProducts();
+    super.initState();
+  }
+
   TextEditingController searchController = TextEditingController();
   @override
   void dispose() {
@@ -24,10 +42,13 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  void navToSearchScreen() {
+  void navToSearchScreen() async {
     if (searchController.text.isNotEmpty) {
-      Navigator.pushNamed(context, SearchScreen.routeName,
-          arguments: searchController.text);
+      products = await searchServices.searchProducts(
+        context: context,
+        searchQuary: searchController.text,
+      );
+      setState(() {});
     } else {
       showSnakBar(context, 'You Need To Write Something To Search.');
     }
@@ -40,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
           elevation: 0,
+          leading: const BackButton(color: Colors.black),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: GlobalVariables.appBarGradient,
@@ -82,7 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 14,
                         ),
                         prefixIcon: InkWell(
-                          onTap: navToSearchScreen,
+                          onTap: () {
+                            navToSearchScreen();
+                          },
                           child: const Padding(
                             padding: EdgeInsets.only(left: 6),
                             child: Icon(
@@ -111,18 +135,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: const Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              AddressBox(),
-              TopCategories(),
-              CarouselImages(),
-              DealOfDay(),
-            ],
-          ),
-        ),
-      ),
+      body: products == null
+          ? const Loader()
+          : Column(
+              children: [
+                const AddressBox(),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: products!.length,
+                    itemBuilder: (_, index) {
+                      return SearchedProducts(product: products![index]);
+                    },
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

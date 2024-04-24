@@ -11,4 +11,10 @@ class ApiLinks {
   static const addProduct = "$server/admin/addproduct";
   static const getProducts = "$server/admin/getproducts";
   static const deleteProduct = "$server/admin/deleteproduct";
+  //? get products by category name
+  static const getProductsByCategory = "$server/api/products";
+  //? search api
+  static const searchProducts = "$server/api/products/search";
+  //? rating product
+  static const ratingProduct = "$server/api/ratingproduct";
 }
