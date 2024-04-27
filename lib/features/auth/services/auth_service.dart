@@ -45,6 +45,7 @@ class AuthServiceImp extends AuthService {
         type: '',
         token: '',
         address: '',
+        cart: [],
       );
 
       http.Response response = await http.post(

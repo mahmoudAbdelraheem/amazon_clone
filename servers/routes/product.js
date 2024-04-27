@@ -1,7 +1,7 @@
 const express = require('express');
 const productRoute = express.Router();
 const auth = require('../middlewares/auth');
-const Product = require('../models/product');
+const {Product} = require('../models/product');
 
 //? get All Products by Category
 //? /api/products?category=Mobiles

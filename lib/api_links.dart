@@ -19,4 +19,6 @@ class ApiLinks {
   static const ratingProduct = "$server/api/ratingproduct";
   //? get deal of the day products
   static const dealOfDay = "$server/api/dealofday";
+  //? add products to user cart
+  static const addToCart = "$server/api/addtocart";
 }

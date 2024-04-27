@@ -1,13 +1,15 @@
 const mongooes = require('mongoose');
+const { productSchema } = require('./product');
+
 
 const userSchema = mongooes.Schema({
     name :{
-        require : true,
+        required : true,
         trim : true,
         type : String,
     },
     email :{
-        require : true,
+        required : true,
         trim : true,
         type : String,
         validate:{
@@ -20,7 +22,7 @@ const userSchema = mongooes.Schema({
         }
     },
     password :{
-        require : true,
+        required : true,
         type : String,
     },
     address : {
@@ -31,6 +33,16 @@ const userSchema = mongooes.Schema({
         type : String,
         default: 'user',
     },
+    cart :[
+        {
+            product : productSchema,
+        
+        quantity : {
+            type: Number,
+            required : true,
+        },
+    },
+    ],
 });
 
 const User = mongooes.model('User', userSchema);
