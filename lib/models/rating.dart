@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class Rating {
@@ -17,12 +16,11 @@ class Rating {
   factory Rating.fromMap(Map<String, dynamic> map) {
     return Rating(
       userId: map['userId'] ?? '',
-      rating: map['rating'] ?? 0.0,
+      rating: map['rating'].toDouble() ?? 0.0,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Rating.fromJson(String source) =>
-      Rating.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Rating.fromJson(Map<String, dynamic> map) => Rating.fromMap(map);
 }

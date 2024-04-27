@@ -32,7 +32,7 @@ class HomeServicesImp extends HomeServices {
           "token": token!,
         },
       );
-
+      print("response = ${response.body}");
       if (context.mounted) {
         httpErrorHandle(
           response: response,
