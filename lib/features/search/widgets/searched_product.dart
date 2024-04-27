@@ -13,6 +13,17 @@ class SearchedProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //? fetching rating
+    double avgRating = 0.0;
+
+    double totalRating = 0.0;
+    for (int i = 0; i < product.rating!.length; i++) {
+      totalRating += product.rating![i].rating;
+    }
+    if (totalRating != 0.0) {
+      avgRating = totalRating / product.rating!.length;
+    }
+
     return InkWell(
       onTap: () {
         navToProductDetailsScreen(context);
@@ -26,7 +37,7 @@ class SearchedProducts extends StatelessWidget {
               children: [
                 Image.network(
                   product.images[0],
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.contain,
                   height: 135,
                   width: 135,
                 ),
@@ -45,7 +56,7 @@ class SearchedProducts extends StatelessWidget {
                     Container(
                       width: 235,
                       padding: const EdgeInsets.only(left: 10, top: 5),
-                      child: const Stars(rating: 4),
+                      child: Stars(rating: avgRating),
                     ),
                     Container(
                       width: 235,

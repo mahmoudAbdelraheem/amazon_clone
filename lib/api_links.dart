@@ -17,4 +17,6 @@ class ApiLinks {
   static const searchProducts = "$server/api/products/search";
   //? rating product
   static const ratingProduct = "$server/api/ratingproduct";
+  //? get deal of the day products
+  static const dealOfDay = "$server/api/dealofday";
 }

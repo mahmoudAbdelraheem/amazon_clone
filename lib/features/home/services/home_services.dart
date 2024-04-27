@@ -13,6 +13,9 @@ abstract class HomeServices {
     required BuildContext context,
     required String category,
   });
+  Future<ProductModel> getDealOfTheDay({
+    required BuildContext context,
+  });
 }
 
 class HomeServicesImp extends HomeServices {
@@ -32,7 +35,6 @@ class HomeServicesImp extends HomeServices {
           "token": token!,
         },
       );
-      print("response = ${response.body}");
       if (context.mounted) {
         httpErrorHandle(
           response: response,
@@ -51,5 +53,45 @@ class HomeServicesImp extends HomeServices {
       }
     }
     return products;
+  }
+
+  @override
+  Future<ProductModel> getDealOfTheDay({required BuildContext context}) async {
+    ProductModel product = ProductModel(
+      name: '',
+      description: '',
+      quantity: 0.0,
+      images: [],
+      category: '',
+      price: 0.0,
+    );
+
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      String? token = pref.getString('token');
+      http.Response response = await http.get(
+        Uri.parse(ApiLinks.dealOfDay),
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "token": token!,
+        },
+      );
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            var responseData = jsonDecode(response.body);
+            product = ProductModel.fromJson(responseData);
+          },
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        showSnakBar(context, e.toString());
+      }
+    }
+
+    return product;
   }
 }

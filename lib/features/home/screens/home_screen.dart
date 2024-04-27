@@ -111,13 +111,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: const Center(
+      body: Center(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              AddressBox(),
-              TopCategories(),
-              CarouselImages(),
+              const AddressBox(),
+              const TopCategories(),
+              const CarouselImages(),
               DealOfDay(),
             ],
           ),
