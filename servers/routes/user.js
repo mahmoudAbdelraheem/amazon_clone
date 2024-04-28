@@ -16,7 +16,7 @@ userRoute.post("/api/addtocart",auth,async(req,res)=>{
             let isFound = false;
             for(let i=0;i<user.cart.length;i++){
                 if(user.cart[i].product._id.equals(product._id)){
-                    isFound ==true;
+                    isFound =true;
                 }
             }
             if(isFound){
@@ -25,7 +25,29 @@ userRoute.post("/api/addtocart",auth,async(req,res)=>{
             }else {
                 user.cart.push({product , quantity:1});
             }
+        }
+        user = await user.save();
+        res.json(user);
 
+    }catch(e){
+        res.status(500).json({error:e.message});
+    }
+});
+//? add product to user cart function
+userRoute.delete("/api/removefromcart/:id",auth,async(req,res)=>{
+    try{
+       const {id} = req.params;
+       const product = await Product.findById(id);
+       let user = await User.findById(req.user);
+
+            for(let i=0;i<user.cart.length;i++){
+                if(user.cart[i].product._id.equals(product._id)){
+                    if(user.cart[i].quantity ==1){
+                       user.cart.splice(i,1);
+                    }else {
+                        user.cart[i].quantity -=1;
+                    }
+                }
         }
         user = await user.save();
         res.json(user);

@@ -55,7 +55,6 @@ class AuthServiceImp extends AuthService {
           "Content-Type": "application/json",
         },
       );
-
       if (context.mounted) {
         httpErrorHandle(
           response: response,

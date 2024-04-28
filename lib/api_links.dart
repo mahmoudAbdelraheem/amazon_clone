@@ -1,6 +1,6 @@
 class ApiLinks {
   //! server link
-  static const String server = "http://192.168.1.6:3000";
+  static const String server = "http://192.168.1.3:3000";
 
   //! auth links
   static const signUp = "$server/api/signup";
@@ -21,4 +21,5 @@ class ApiLinks {
   static const dealOfDay = "$server/api/dealofday";
   //? add products to user cart
   static const addToCart = "$server/api/addtocart";
+  static const removeFromCart = "$server/api/removefromcart";
 }

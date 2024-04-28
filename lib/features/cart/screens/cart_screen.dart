@@ -1,22 +1,23 @@
-import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/common/widgets/custom_button.dart';
+import 'package:amazon_clone/features/cart/widgets/cart_product.dart';
+import 'package:amazon_clone/features/cart/widgets/cart_subtotal.dart';
 import 'package:amazon_clone/features/home/widget/address_box.dart';
-import 'package:amazon_clone/features/home/widget/carousel_images.dart';
-import 'package:amazon_clone/features/search/screens/search_screen.dart';
+import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:provider/provider.dart';
 
-import '../widget/deal_of_day.dart';
-import '../widget/top_categories.dart';
+import '../../../constants/global_variables.dart';
+import '../../../constants/utils.dart';
+import '../../search/screens/search_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String routeName = '/home_screen';
-  const HomeScreen({super.key});
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _CartScreenState extends State<CartScreen> {
   TextEditingController searchController = TextEditingController();
   @override
   void dispose() {
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserPorvider>().user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -111,16 +113,35 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: const Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              AddressBox(),
-              TopCategories(),
-              CarouselImages(),
-              DealOfDay(),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const AddressBox(),
+            const CartSubtotal(),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomButton(
+                title: 'Proceed To By (${user.cart.length} items)',
+                color: Colors.yellow[600],
+                onPressed: () {},
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              color: Colors.black12.withOpacity(0.08),
+              height: 1,
+            ),
+            const SizedBox(height: 5),
+            ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: user.cart.length,
+                itemBuilder: (context, index) {
+                  return CartProduct(
+                    index: index,
+                  );
+                }),
+          ],
         ),
       ),
     );
