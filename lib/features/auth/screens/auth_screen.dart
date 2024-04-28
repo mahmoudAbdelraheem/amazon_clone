@@ -112,32 +112,14 @@ class _AuthScreenState extends State<AuthScreen> {
                       CustomTextField(
                         myController: _nameController,
                         hintText: 'name',
-                        validator: (val) {
-                          if (val == null) {
-                            return 'Please Enter Your name';
-                          }
-                          return null;
-                        },
                       ),
                       CustomTextField(
                         myController: _emailController,
                         hintText: 'email',
-                        validator: (val) {
-                          if (val == null) {
-                            return 'Please Enter Your email';
-                          }
-                          return null;
-                        },
                       ),
                       CustomTextField(
                         myController: _passwordController,
                         hintText: 'password',
-                        validator: (val) {
-                          if (val == null) {
-                            return 'Please Enter Your password';
-                          }
-                          return null;
-                        },
                       ),
                       CustomButton(
                         title: 'Sign Up',
@@ -186,22 +168,10 @@ class _AuthScreenState extends State<AuthScreen> {
                       CustomTextField(
                         myController: _emailController,
                         hintText: 'email',
-                        validator: (val) {
-                          if (val == null) {
-                            return 'Please Enter Your email';
-                          }
-                          return null;
-                        },
                       ),
                       CustomTextField(
                         myController: _passwordController,
                         hintText: 'password',
-                        validator: (val) {
-                          if (val == null) {
-                            return 'Please Enter Your password';
-                          }
-                          return null;
-                        },
                       ),
                       CustomButton(
                         title: 'Sign In',

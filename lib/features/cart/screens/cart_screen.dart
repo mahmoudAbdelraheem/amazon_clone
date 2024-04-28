@@ -1,4 +1,5 @@
 import 'package:amazon_clone/common/widgets/custom_button.dart';
+import 'package:amazon_clone/features/address/screens/address_screen.dart';
 import 'package:amazon_clone/features/cart/widgets/cart_product.dart';
 import 'package:amazon_clone/features/cart/widgets/cart_subtotal.dart';
 import 'package:amazon_clone/features/home/widget/address_box.dart';
@@ -34,9 +35,18 @@ class _CartScreenState extends State<CartScreen> {
     }
   }
 
+  void navToAddressScreen(int sum) {
+    Navigator.pushNamed(context, AddressScreen.routeName,
+        arguments: sum.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserPorvider>().user;
+    int sum = 0;
+    user.cart
+        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
+        .toList();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -123,7 +133,7 @@ class _CartScreenState extends State<CartScreen> {
               child: CustomButton(
                 title: 'Proceed To By (${user.cart.length} items)',
                 color: Colors.yellow[600],
-                onPressed: () {},
+                onPressed: () => navToAddressScreen(sum),
               ),
             ),
             const SizedBox(height: 10),
@@ -133,14 +143,15 @@ class _CartScreenState extends State<CartScreen> {
             ),
             const SizedBox(height: 5),
             ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: user.cart.length,
-                itemBuilder: (context, index) {
-                  return CartProduct(
-                    index: index,
-                  );
-                }),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: user.cart.length,
+              itemBuilder: (context, index) {
+                return CartProduct(
+                  index: index,
+                );
+              },
+            ),
           ],
         ),
       ),

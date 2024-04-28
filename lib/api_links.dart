@@ -22,4 +22,8 @@ class ApiLinks {
   //? add products to user cart
   static const addToCart = "$server/api/addtocart";
   static const removeFromCart = "$server/api/removefromcart";
+  //? add user address
+  static const addUserAddress = "$server/api/adduseraddress";
+  //? place user order
+  static const placeOrder = "$server/api/order";
 }
