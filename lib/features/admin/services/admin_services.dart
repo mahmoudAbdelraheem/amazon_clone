@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:amazon_clone/api_links.dart';
 import 'package:amazon_clone/constants/error_handle.dart';
 import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/features/admin/models/sales.dart';
 import 'package:amazon_clone/models/order_model.dart';
 import 'package:amazon_clone/models/product_model.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,8 @@ abstract class AdminServices {
     required int currentStatus,
     required VoidCallback onSuccess,
   });
+
+  Future<Map<String, dynamic>> getAnalytics(BuildContext context);
 }
 
 class AdminServicesImp extends AdminServices {
@@ -241,5 +244,47 @@ class AdminServicesImp extends AdminServices {
         showSnakBar(context, e.toString());
       }
     }
+  }
+
+  @override
+  Future<Map<String, dynamic>> getAnalytics(BuildContext context) async {
+    List<Sales> sales = [];
+    int totalEaring = 0;
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      var token = pref.getString('token');
+      var response = await http.get(
+        Uri.parse(ApiLinks.getAnalyticsEarings),
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "token": token!,
+        },
+      );
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            var responseData = jsonDecode(response.body);
+            totalEaring = responseData['totalEarning'];
+            sales = [
+              Sales('Mobiles', responseData['mobileEarning']),
+              Sales('Essentials', responseData['essentialsEarning']),
+              Sales('Appliances', responseData['appliancesEarning']),
+              Sales('Books', responseData['booksEarning']),
+              Sales('Fashion', responseData['fashionEarning']),
+            ];
+          },
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        showSnakBar(context, e.toString());
+      }
+    }
+    return {
+      'sales': sales,
+      'totalEaring': totalEaring,
+    };
   }
 }

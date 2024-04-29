@@ -31,4 +31,5 @@ class ApiLinks {
   //? get all users orders for admin
   static const getAllUserOrders = "$server/admin/getallorders";
   static const changeOrderStatus = "$server/admin/changeorderstatus";
+  static const getAnalyticsEarings = "$server/admin/analytics";
 }
