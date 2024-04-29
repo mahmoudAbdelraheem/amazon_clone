@@ -28,4 +28,7 @@ class ApiLinks {
   static const placeOrder = "$server/api/order";
   //? get user orders
   static const getOrders = "$server/api/getorders";
+  //? get all users orders for admin
+  static const getAllUserOrders = "$server/admin/getallorders";
+  static const changeOrderStatus = "$server/admin/changeorderstatus";
 }

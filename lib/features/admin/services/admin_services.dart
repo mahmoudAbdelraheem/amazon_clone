@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:amazon_clone/api_links.dart';
 import 'package:amazon_clone/constants/error_handle.dart';
 import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/models/order_model.dart';
 import 'package:amazon_clone/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
@@ -25,10 +26,20 @@ abstract class AdminServices {
 
   //? get all products
   Future<List<ProductModel>> getProducts(BuildContext context);
+
   //? delete product by id
   deleteProduct({
     required BuildContext context,
     required String id,
+    required VoidCallback onSuccess,
+  });
+  //? get all users orders
+  Future<List<OrderModel>> getUsersOrders(BuildContext context);
+  //? change order status
+  void changeOrderStatus({
+    required BuildContext context,
+    required OrderModel order,
+    required int currentStatus,
     required VoidCallback onSuccess,
   });
 }
@@ -144,6 +155,78 @@ class AdminServicesImp extends AdminServices {
         },
         body: jsonEncode({'id': id}),
       );
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            onSuccess();
+          },
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        showSnakBar(context, e.toString());
+      }
+    }
+  }
+
+  @override
+  Future<List<OrderModel>> getUsersOrders(BuildContext context) async {
+    List<OrderModel> orders = [];
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      var token = pref.getString('token');
+      var response = await http.get(
+        Uri.parse(ApiLinks.getAllUserOrders),
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "token": token!,
+        },
+      );
+
+      if (context.mounted) {
+        httpErrorHandle(
+          response: response,
+          context: context,
+          onSuccess: () {
+            List<dynamic> responseData = jsonDecode(response.body);
+            for (int i = 0; i < responseData.length; i++) {
+              orders.add(OrderModel.fromJson(responseData[i]));
+            }
+          },
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        showSnakBar(context, e.toString());
+      }
+    }
+    return orders;
+  }
+
+  @override
+  void changeOrderStatus({
+    required BuildContext context,
+    required OrderModel order,
+    required int currentStatus,
+    required VoidCallback onSuccess,
+  }) async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      var token = pref.getString('token');
+      var response = await http.post(
+        Uri.parse(ApiLinks.changeOrderStatus),
+        headers: <String, String>{
+          "Content-Type": "application/json",
+          "token": token!,
+        },
+        body: jsonEncode({
+          'orderId': order.id,
+          'currentStatus': currentStatus,
+        }),
+      );
+
       if (context.mounted) {
         httpErrorHandle(
           response: response,

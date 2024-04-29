@@ -1,8 +1,12 @@
+import 'package:amazon_clone/common/widgets/custom_button.dart';
+import 'package:amazon_clone/features/admin/services/admin_services.dart';
 import 'package:amazon_clone/models/order_model.dart';
+import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/search/screens/search_screen.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/utils.dart';
 
@@ -40,8 +44,24 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     setState(() {});
   }
 
+//? only be for admin
+  final AdminServicesImp adminServices = AdminServicesImp();
+  void changeOrderStatus(int step) {
+    adminServices.changeOrderStatus(
+      context: context,
+      order: widget.order,
+      currentStatus: step + 1,
+      onSuccess: () {
+        setState(() {
+          currentStep += 1;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserPorvider>().user;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -230,7 +250,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ),
                 child: Stepper(
                   controlsBuilder: (context, details) {
-                    return const SizedBox();
+                    if (user.type == 'admin') {
+                      return CustomButton(
+                        title: 'Done',
+                        onPressed: () => changeOrderStatus(details.currentStep),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
                   },
                   currentStep: currentStep,
                   steps: [
