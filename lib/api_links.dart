@@ -26,4 +26,6 @@ class ApiLinks {
   static const addUserAddress = "$server/api/adduseraddress";
   //? place user order
   static const placeOrder = "$server/api/order";
+  //? get user orders
+  static const getOrders = "$server/api/getorders";
 }

@@ -11,7 +11,7 @@ class SingleProduct extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(
-            color: Colors.black,
+            color: Colors.black12,
             width: 1.5,
           ),
           borderRadius: BorderRadius.circular(5),

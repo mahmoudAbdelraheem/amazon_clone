@@ -100,12 +100,22 @@ userRoute.post("/api/order",auth,async(req,res)=>{
         totalPrice: totalAmount,
         address,
         userId:req.user,
-        orderAt : new Date().getTime,
+        orderAt : new Date().getTime(),
        });
        order = await order.save();
        res.json(order);
     }catch(e){
         res.status(500).json({error:e.message});
+    }
+});
+
+userRoute.get("/api/getorders", auth,async(req,res)=>{
+    try{
+        const id = req.user;
+        const orders = await Order.find({userId : id});
+        res.json(orders);
+    }catch(e){
+        res.status(500).json({error : e.message});
     }
 });
 

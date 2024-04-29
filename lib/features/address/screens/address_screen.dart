@@ -91,6 +91,11 @@ class _AddressScreenState extends State<AddressScreen> {
     }
   }
 
+  void payOnRecivePressed(String addressFromProvider, paymentResult) {
+    onPyPressed(addressFromProvider);
+    onGooglePayResult(paymentResult);
+  }
+
   @override
   Widget build(BuildContext context) {
     //? get user data
@@ -157,6 +162,23 @@ class _AddressScreenState extends State<AddressScreen> {
                       )
                     : const SizedBox.shrink(),
               ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Colors.black87, width: 1),
+                    borderRadius: BorderRadius.circular(60),
+                  ),
+                  onPressed: () {
+                    payOnRecivePressed(address, '');
+                  },
+                  child: const Text(
+                    'Pay On Receive',
+                  ),
+                ),
+              )
             ],
           ),
         ),
