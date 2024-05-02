@@ -1,14 +1,10 @@
+import 'package:amazon_clone/features/profile/services/profile_services.dart';
 import 'package:amazon_clone/features/profile/widgets/profile_button.dart';
 import 'package:flutter/material.dart';
 
-class CustomTopButtons extends StatefulWidget {
+class CustomTopButtons extends StatelessWidget {
   const CustomTopButtons({super.key});
 
-  @override
-  State<CustomTopButtons> createState() => _CustomTopButtonsState();
-}
-
-class _CustomTopButtonsState extends State<CustomTopButtons> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +18,10 @@ class _CustomTopButtonsState extends State<CustomTopButtons> {
         const SizedBox(height: 10),
         Row(
           children: [
-            ProfilButton(text: 'Log Out', onTap: () {}),
+            ProfilButton(
+              text: 'Log Out',
+              onTap: () => ProfileServicesImp().logOut(context: context),
+            ),
             ProfilButton(text: 'Your Wish List', onTap: () {}),
           ],
         ),

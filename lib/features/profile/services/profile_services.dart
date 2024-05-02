@@ -3,14 +3,19 @@ import 'dart:convert';
 import 'package:amazon_clone/api_links.dart';
 import 'package:amazon_clone/constants/error_handle.dart';
 import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
 import 'package:amazon_clone/models/order_model.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ProfileServices {
   Future<List<OrderModel>> getUserOrders({required BuildContext context});
+  logOut({
+    required BuildContext context,
+  });
 }
 
 class ProfileServicesImp extends ProfileServices {
@@ -27,8 +32,6 @@ class ProfileServicesImp extends ProfileServices {
           "token": userProvider.user.token,
         },
       );
-      print('user id = ${userProvider.user.id}');
-      print('orders json = ${response.body}');
       if (context.mounted) {
         httpErrorHandle(
           response: response,
@@ -48,5 +51,24 @@ class ProfileServicesImp extends ProfileServices {
     }
 
     return orders;
+  }
+
+  @override
+  logOut({required BuildContext context}) async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setString('token', '');
+      if (context.mounted) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          AuthScreen.routeName,
+          (route) => false,
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        showSnakBar(context, e.toString());
+      }
+    }
   }
 }
