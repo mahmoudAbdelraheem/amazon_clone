@@ -72,10 +72,11 @@ adminRoute.post("/admin/changeorderstatus",admin,async(req,res)=>{
 
 adminRoute.get('/admin/analytics',admin,async(req,res)=>{
     try{
-        const orders = Order.find({});
+        let orders = await Order.find({});
         let totalEarning = 0;
         for(let i =0;i<orders.length;i++){
             for(let j=0;j<orders[i].products.length;j++){
+                
                 totalEarning += orders[i].products[j].quantity * orders[i].products[j].product.price;
             }
         }
@@ -85,7 +86,6 @@ adminRoute.get('/admin/analytics',admin,async(req,res)=>{
        let appliancesEarning = await fetchCategoryWiseProduct('Appliances');
        let booksEarning = await fetchCategoryWiseProduct('Books');
        let fashionEarning = await fetchCategoryWiseProduct('Fashion');
-
        let earings = {
         totalEarning,
         mobileEarning,
