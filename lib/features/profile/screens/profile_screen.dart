@@ -1,7 +1,7 @@
-import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/profile/widgets/below_app_bar.dart';
-import 'package:amazon_clone/features/profile/widgets/custom_top_bottons.dart';
-import 'package:amazon_clone/features/profile/widgets/orders.dart';
+import '../../../constants/global_variables.dart';
+import '../widgets/below_app_bar.dart';
+import '../widgets/custom_top_bottons.dart';
+import '../widgets/orders.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {

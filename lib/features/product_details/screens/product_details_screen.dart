@@ -1,8 +1,8 @@
-import 'package:amazon_clone/common/widgets/custom_button.dart';
-import 'package:amazon_clone/common/widgets/stars.dart';
-import 'package:amazon_clone/features/product_details/services/product_services.dart';
-import 'package:amazon_clone/models/product_model.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../../common/widgets/stars.dart';
+import '../services/product_services.dart';
+import '../../../models/product_model.dart';
+import '../../../providers/user_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';

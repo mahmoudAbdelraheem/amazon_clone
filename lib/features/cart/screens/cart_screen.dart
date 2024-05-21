@@ -1,9 +1,9 @@
-import 'package:amazon_clone/common/widgets/custom_button.dart';
-import 'package:amazon_clone/features/address/screens/address_screen.dart';
-import 'package:amazon_clone/features/cart/widgets/cart_product.dart';
-import 'package:amazon_clone/features/cart/widgets/cart_subtotal.dart';
-import 'package:amazon_clone/features/home/widget/address_box.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../address/screens/address_screen.dart';
+import '../widgets/cart_product.dart';
+import '../widgets/cart_subtotal.dart';
+import '../../home/widget/address_box.dart';
+import '../../../providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

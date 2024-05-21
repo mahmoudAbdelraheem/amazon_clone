@@ -1,6 +1,6 @@
 class ApiLinks {
   //! server link
-  static const String server = "http://192.168.1.3:3000";
+  static const String server = "http://10.170.240.161:3000";
 
   //! auth links
   static const signUp = "$server/api/signup";

@@ -1,5 +1,5 @@
-import 'package:amazon_clone/features/profile/services/profile_services.dart';
-import 'package:amazon_clone/features/profile/widgets/profile_button.dart';
+import '../services/profile_services.dart';
+import 'profile_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomTopButtons extends StatelessWidget {

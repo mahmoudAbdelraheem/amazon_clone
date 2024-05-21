@@ -1,6 +1,6 @@
-import 'package:amazon_clone/constants/utils.dart';
-import 'package:amazon_clone/features/address/services/address_services.dart';
-import 'package:amazon_clone/features/address/widgets/current_address.dart';
+import '../../../constants/utils.dart';
+import '../services/address_services.dart';
+import '../widgets/current_address.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../common/widgets/custom_text_field.dart';

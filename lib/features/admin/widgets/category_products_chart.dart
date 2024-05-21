@@ -1,5 +1,5 @@
-import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/admin/models/sales.dart';
+import '../../../constants/global_variables.dart';
+import '../models/sales.dart';
 import 'package:flutter/material.dart';
 import 'package:d_chart/d_chart.dart';
 
@@ -36,6 +36,7 @@ class CategoryProductsChart extends StatelessWidget {
         },
         barLabelValue: (group, ordinalData, index) {
           String measure = ordinalData.measure.toString();
+
           return measure;
         },
         barLabelDecorator: BarLabelDecorator(

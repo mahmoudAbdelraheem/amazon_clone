@@ -1,6 +1,6 @@
-import 'package:amazon_clone/common/widgets/loader.dart';
-import 'package:amazon_clone/features/product_details/screens/product_details_screen.dart';
-import 'package:amazon_clone/models/product_model.dart';
+import '../../../common/widgets/loader.dart';
+import '../../product_details/screens/product_details_screen.dart';
+import '../../../models/product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../services/home_services.dart';
@@ -69,8 +69,8 @@ class _DealOfDayState extends State<DealOfDay> {
                         ),
                       ),
                       Container(
-                        padding:
-                            const EdgeInsets.only(top: 5, left: 15, right: 40),
+                        padding: const EdgeInsets.only(
+                            top: 5, left: 15, right: 40, bottom: 10),
                         alignment: Alignment.topLeft,
                         child: Text(
                           product!.name,
@@ -85,11 +85,15 @@ class _DealOfDayState extends State<DealOfDay> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: product!.images
                               .map(
-                                (url) => Image.network(
-                                  url,
-                                  fit: BoxFit.fitWidth,
-                                  width: 100,
-                                  height: 100,
+                                (url) => Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Image.network(
+                                    url,
+                                    fit: BoxFit.fitWidth,
+                                    width: 100,
+                                    height: 100,
+                                  ),
                                 ),
                               )
                               .toList(),

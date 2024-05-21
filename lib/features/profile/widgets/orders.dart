@@ -1,9 +1,9 @@
-import 'package:amazon_clone/common/widgets/loader.dart';
-import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/order_derails/screens/order_details_screen.dart';
-import 'package:amazon_clone/features/profile/services/profile_services.dart';
-import 'package:amazon_clone/features/profile/widgets/single_product.dart';
-import 'package:amazon_clone/models/order_model.dart';
+import '../../../common/widgets/loader.dart';
+import '../../../constants/global_variables.dart';
+import '../../order_derails/screens/order_details_screen.dart';
+import '../services/profile_services.dart';
+import 'single_product.dart';
+import '../../../models/order_model.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget {

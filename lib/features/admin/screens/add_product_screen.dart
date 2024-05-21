@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:amazon_clone/common/widgets/custom_button.dart';
-import 'package:amazon_clone/common/widgets/custom_text_field.dart';
-import 'package:amazon_clone/constants/utils.dart';
-import 'package:amazon_clone/features/admin/services/admin_services.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../../common/widgets/custom_text_field.dart';
+import '../../../constants/utils.dart';
+import '../services/admin_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';

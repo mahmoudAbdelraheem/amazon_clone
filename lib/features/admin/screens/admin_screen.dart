@@ -1,5 +1,6 @@
-import 'package:amazon_clone/features/admin/screens/analytics_screen.dart';
-import 'package:amazon_clone/features/admin/screens/orders_screen.dart';
+import 'analytics_screen.dart';
+import 'orders_screen.dart';
+import '../services/admin_services.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variables.dart';
@@ -52,12 +53,24 @@ class _AdminScreenState extends State<AdminScreen> {
                   color: Colors.black,
                 ),
               ),
-              const Text(
-                'Admin',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  const Text(
+                    'Admin',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () =>
+                        AdminServicesImp().logOut(context: context),
+                    icon: const Icon(
+                      Icons.logout_outlined,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
               )
             ],
           ),

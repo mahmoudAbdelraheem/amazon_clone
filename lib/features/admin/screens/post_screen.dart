@@ -1,6 +1,6 @@
-import 'package:amazon_clone/common/widgets/loader.dart';
-import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
-import 'package:amazon_clone/features/profile/widgets/single_product.dart';
+import '../../../common/widgets/loader.dart';
+import 'add_product_screen.dart';
+import '../../profile/widgets/single_product.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/product_model.dart';

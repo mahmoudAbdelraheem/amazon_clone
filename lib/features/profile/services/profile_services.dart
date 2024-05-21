@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:amazon_clone/api_links.dart';
-import 'package:amazon_clone/constants/error_handle.dart';
-import 'package:amazon_clone/constants/utils.dart';
-import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
-import 'package:amazon_clone/models/order_model.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
+import '../../../api_links.dart';
+import '../../../constants/error_handle.dart';
+import '../../../constants/utils.dart';
+import '../../auth/screens/auth_screen.dart';
+import '../../../models/order_model.dart';
+import '../../../providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';

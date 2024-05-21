@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:amazon_clone/api_links.dart';
-import 'package:amazon_clone/common/widgets/custom_buttom_bar.dart';
-import 'package:amazon_clone/constants/error_handle.dart';
-import 'package:amazon_clone/constants/utils.dart';
-import 'package:amazon_clone/models/user_model.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
+import '../../../api_links.dart';
+import '../../../common/widgets/custom_buttom_bar.dart';
+import '../../../constants/error_handle.dart';
+import '../../../constants/utils.dart';
+import '../../../models/user_model.dart';
+import '../../../providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,6 +97,7 @@ class AuthServiceImp extends AuthService {
               Provider.of<UserPorvider>(context, listen: false)
                   .setUser(jsonDecode(response.body));
               await pref.setString('token', jsonDecode(response.body)['token']);
+
               if (context.mounted) {
                 Navigator.pushNamedAndRemoveUntil(
                   context,

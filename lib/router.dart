@@ -1,13 +1,13 @@
-import 'package:amazon_clone/common/widgets/custom_buttom_bar.dart';
-import 'package:amazon_clone/features/address/screens/address_screen.dart';
-import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
-import 'package:amazon_clone/features/auth/screens/auth_screen.dart';
-import 'package:amazon_clone/features/home/screens/category_deals_screen.dart';
-import 'package:amazon_clone/features/home/screens/home_screen.dart';
-import 'package:amazon_clone/features/order_derails/screens/order_details_screen.dart';
-import 'package:amazon_clone/features/product_details/screens/product_details_screen.dart';
-import 'package:amazon_clone/features/search/screens/search_screen.dart';
-import 'package:amazon_clone/models/order_model.dart';
+import 'common/widgets/custom_buttom_bar.dart';
+import 'features/address/screens/address_screen.dart';
+import 'features/admin/screens/add_product_screen.dart';
+import 'features/auth/screens/auth_screen.dart';
+import 'features/home/screens/category_deals_screen.dart';
+import 'features/home/screens/home_screen.dart';
+import 'features/order_derails/screens/order_details_screen.dart';
+import 'features/product_details/screens/product_details_screen.dart';
+import 'features/search/screens/search_screen.dart';
+import 'models/order_model.dart';
 import 'package:flutter/material.dart';
 
 import 'models/product_model.dart';

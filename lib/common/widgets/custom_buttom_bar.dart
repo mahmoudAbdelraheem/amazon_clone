@@ -1,9 +1,9 @@
-import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/cart/screens/cart_screen.dart';
-import 'package:amazon_clone/features/profile/screens/profile_screen.dart';
-import 'package:amazon_clone/providers/user_provider.dart';
+import '../../constants/global_variables.dart';
+import '../../features/cart/screens/cart_screen.dart';
+import '../../features/profile/screens/profile_screen.dart';
+import '../../providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:amazon_clone/features/home/screens/home_screen.dart';
+import '../../features/home/screens/home_screen.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
 

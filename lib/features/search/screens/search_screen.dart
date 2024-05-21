@@ -1,8 +1,8 @@
-import 'package:amazon_clone/common/widgets/loader.dart';
-import 'package:amazon_clone/features/home/widget/address_box.dart';
-import 'package:amazon_clone/features/search/services/search_services.dart';
-import 'package:amazon_clone/features/search/widgets/searched_product.dart';
-import 'package:amazon_clone/models/product_model.dart';
+import '../../../common/widgets/loader.dart';
+import '../../home/widget/address_box.dart';
+import '../services/search_services.dart';
+import '../widgets/searched_product.dart';
+import '../../../models/product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variables.dart';

@@ -1,7 +1,7 @@
-import 'package:amazon_clone/common/widgets/loader.dart';
-import 'package:amazon_clone/features/home/services/home_services.dart';
-import 'package:amazon_clone/features/product_details/screens/product_details_screen.dart';
-import 'package:amazon_clone/models/product_model.dart';
+import '../../../common/widgets/loader.dart';
+import '../services/home_services.dart';
+import '../../product_details/screens/product_details_screen.dart';
+import '../../../models/product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variables.dart';
@@ -95,7 +95,9 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                               child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Colors.black, width: 0.5),
+                                    color: Colors.black,
+                                    width: 0.5,
+                                  ),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),

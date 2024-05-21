@@ -1,7 +1,7 @@
-import 'package:amazon_clone/common/widgets/custom_button.dart';
-import 'package:amazon_clone/common/widgets/custom_text_field.dart';
-import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/auth/services/auth_service.dart';
+import '../../../common/widgets/custom_button.dart';
+import '../../../common/widgets/custom_text_field.dart';
+import '../../../constants/global_variables.dart';
+import '../services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 //? enum for auth
@@ -22,7 +22,7 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   //? auth enum
-  Auth _auth = Auth.signup;
+  Auth _auth = Auth.signin;
   //? form key state
   final GlobalKey<FormState> _signUpFromKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _signInFromKey = GlobalKey<FormState>();
@@ -107,29 +107,32 @@ class _AuthScreenState extends State<AuthScreen> {
                 color: GlobalVariables.backgroundColor,
                 child: Form(
                   key: _signUpFromKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        myController: _nameController,
-                        hintText: 'name',
-                      ),
-                      CustomTextField(
-                        myController: _emailController,
-                        hintText: 'email',
-                      ),
-                      CustomTextField(
-                        myController: _passwordController,
-                        hintText: 'password',
-                      ),
-                      CustomButton(
-                        title: 'Sign Up',
-                        onPressed: () {
-                          if (_signUpFromKey.currentState!.validate()) {
-                            signUp();
-                          }
-                        },
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                          myController: _nameController,
+                          hintText: 'name',
+                        ),
+                        CustomTextField(
+                          myController: _emailController,
+                          hintText: 'email',
+                        ),
+                        CustomTextField(
+                          myController: _passwordController,
+                          hintText: 'password',
+                        ),
+                        CustomButton(
+                          title: 'Sign Up',
+                          onPressed: () {
+                            if (_signUpFromKey.currentState!.validate()) {
+                              signUp();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -163,25 +166,28 @@ class _AuthScreenState extends State<AuthScreen> {
                 color: GlobalVariables.backgroundColor,
                 child: Form(
                   key: _signInFromKey,
-                  child: Column(
-                    children: [
-                      CustomTextField(
-                        myController: _emailController,
-                        hintText: 'email',
-                      ),
-                      CustomTextField(
-                        myController: _passwordController,
-                        hintText: 'password',
-                      ),
-                      CustomButton(
-                        title: 'Sign In',
-                        onPressed: () {
-                          if (_signInFromKey.currentState!.validate()) {
-                            signIn();
-                          }
-                        },
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                          myController: _emailController,
+                          hintText: 'email',
+                        ),
+                        CustomTextField(
+                          myController: _passwordController,
+                          hintText: 'password',
+                        ),
+                        CustomButton(
+                          title: 'Sign In',
+                          onPressed: () {
+                            if (_signInFromKey.currentState!.validate()) {
+                              signIn();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
